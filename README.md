@@ -30,7 +30,28 @@ The Turtlesim package is a simple 2D simulation of mobile robots that move accor
 4. To find the pose (position and orientation) of the turtle: `rostopic echo /turtle1/pose`. The origin is in the lower left corner, with  the x-axis pointing to the right and the y-axis pointing upwards. 
 #### Programming challenge
 Spawn a new turtle in the middle of the screen. Make it move in outgoing spiral.
-### 
+### Create a package to control the turtle
+#### Concepts involved
+- Catkin workspace
+- ROS packages
+- Building executable
+- Set environment variables 
+#### Steps
+1. Create your [catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace): `mkdir -P catkin_ws/src`, and `cd catkin_ws`, followed by `catkin_make`.
+2. Create your first package. Go to the source folder `cd ~/catkin_ws/src`. Then execute `catkin_create_pkg turtle_controller roscpp std_msgs geometry_msgs`. This will create your package folder. 
+3. Add some code to your package. Go to the package source folder `cd ~/catkin_ws/src/turtle_controller/src`. Then get the example cpp file from this repository `wget https://github.com/kjartan-at-tec/ros-intro/blob/master/print_pose.cpp`
+4. Compile the code and run your node.
+   - Make modifications to your package's `CMakeLists.txt`
+   - Go to the catkin workspace root `cd ~/catkin_ws/`
+   - Compile `catkin_make`
+   - Set environment variables, so that ROS can find your package `source /devel/setup.bash`
+   - Run your node `rosrun turtle_controller turtle_controller_print_pose`
+5. Modify the code to do open-loop control of the turtle, making it move in a circle of a given radius.
+### Programming challenge 
+Implement a feedback controller with proportional gain that will make the turtle move to a desired point in the plane. Some hints
+- Include math.m to get access to  `atan2` function: `#include "math.h"`
+- If the variables `dx` and `dy` hold the distance to the goal point in the two directions, then the angle to the goal can be calculated with `double goal_dir = atan2(dy,dx);`
+- Make the linear velocity proportional to the distance to the goal, with a proportional gain K. Make the angular velocity be proportional to the error in heading with a gain that is larger than K.   
 
 ## Resources
 - [http://wiki.ros.org/turtlesim]
