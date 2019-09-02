@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
-from geometry_msgs import Twist
-from turtlesim import Pose
+import geometry_msgs
+import turtlesim
 
 
 def poseCallback(pose_message):
