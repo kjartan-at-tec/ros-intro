@@ -13,8 +13,8 @@ def poseCallback(pose_message):
 def main():
 
   rospy.init_node("print_pose_node")
-  rospy.Subscriber("/turtle1/pose", 10, poseCallback)
-  pub = rospy.Publisher("/turtle1/cmd_vel", geometry_msg.Twist)
+  rospy.Subscriber("/turtle1/pose", turtlesim.Pose, poseCallback)
+  pub = rospy.Publisher("/turtle1/cmd_vel", geometry_msg.Twist, queue_size=2)
 
   r = rospy.Rate(10) # 10hz
   while not rospy.is_shutdown():
