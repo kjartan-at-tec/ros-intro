@@ -18,7 +18,7 @@ The Turtlesim package is a simple 2D simulation of mobile robots that move accor
 - Executing a node: `rosrun`
 - Internode communication
   - [**topics**](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics): A message board identified by its name. Any nodes can publish messages to a topic, and any nodes can subscribe to topics to receive messages that are published.
-  - **services**: A node can provide a service, which other nodes call. 
+  - [**services**](http://wiki.ros.org/Services): A node can provide a service, which other nodes call. 
 #### Steps
 1. Start turtlesim. Open a new terminal window. Execute `rosrun turtlesim turtlesim_node`, which will run the executable `turtlesim_node` from the package `turtlesim`.
 2. Find out how to interact with the turtlesim node.
