@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
-import geometry_msgs
-import turtlesim
+from geometry_msgs.msg import Twist
+from turtlesim.msg import Pose
 
 
 def poseCallback(pose_message):
@@ -11,18 +11,17 @@ def poseCallback(pose_message):
     
 
 def main():
+    rospy.init_node("print_pose_node")
+    rospy.Subscriber("/turtle1/pose", Pose,  poseCallback)
+    pub = rospy.Publisher("/turtle1/cmd_vel", Twist, queue_size=2)
 
-  rospy.init_node("print_pose_node")
-  rospy.Subscriber("/turtle1/pose", turtlesim.msg.Pose,  poseCallback)
-  pub = rospy.Publisher("/turtle1/cmd_vel", geometry_msgs.msg.Twist, queue_size=2)
+    r = rospy.Rate(10) # 10hz
+    while not rospy.is_shutdown():
+        # Do something
+        r.sleep()
 
-  r = rospy.Rate(10) # 10hz
-  while not rospy.is_shutdown():
-      # Do something
-      rospy.spinOnce()
-      r.sleep()
-
-  rospy.loginfo("Shutdown detected. Exiting");
+    rospy.spin()  
+    rospy.loginfo("Shutdown detected. Exiting");
 
 if __name__ == '__main__':
     main()
